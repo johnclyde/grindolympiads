@@ -19,7 +19,7 @@
         function updateMathJax() {
             let paragraphs = input.value.split('\n\n');
             output.innerHTML = paragraphs.map(paragraph => `\\[\n${paragraph}\n\\]`).join('\n\n');
-            MathJax.typesetPromise();  // Re-render with MathJax
+            MathJax.typesetPromise();
         }
 
         input.addEventListener('input', updateMathJax);  // Update rendering on input change
