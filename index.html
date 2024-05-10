@@ -17,12 +17,10 @@
         const output = document.getElementById('output');
 
         input.addEventListener('input', function() {
-            // Convert line breaks to LaTeX newlines \\
-            const formattedText = input.value.replace(/\n/g, '\\\\ ');
-            // Ensure it's treated as a block of math by surrounding with $$
+            // Use `\\` for new lines and wrap each line in \text{} if necessary
+            let formattedText = this.value.split('\n').map(line => `\\text{${line}}`).join(' \\\\ ');
             output.innerHTML = `$$${formattedText}$$`;
-            // Request MathJax to typeset the new math content
-            MathJax.typesetPromise();
+            MathJax.typesetPromise(); // Re-render with MathJax
         });
     </script>
 </body>
