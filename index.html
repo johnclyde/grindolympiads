@@ -9,19 +9,20 @@
 </head>
 <body>
     <h1>LaTeX Live Renderer</h1>
-    <textarea id="latex-input" style="width: 100%; height: 100px;"></textarea>
+    <textarea id="latex-input" style="width: 100%; height: 150px;"></textarea>
     <div id="output" style="margin-top: 20px;"></div>
 
     <script>
         const input = document.getElementById('latex-input');
         const output = document.getElementById('output');
 
-        input.addEventListener('input', function() {
-            // Use `\\` for new lines and wrap each line in \text{} if necessary
-            let formattedText = this.value.split('\n').map(line => `\\text{${line}}`).join(' \\\\ ');
-            output.innerHTML = `$$${formattedText}$$`;
-            MathJax.typesetPromise(); // Re-render with MathJax
-        });
+        function updateMathJax() {
+            output.innerHTML = input.value;
+            MathJax.typesetPromise();
+        }
+
+        input.addEventListener('input', updateMathJax);  // Update rendering on input change
+        window.onload = updateMathJax;  // Initial rendering when the page loads
     </script>
 </body>
 </html>
