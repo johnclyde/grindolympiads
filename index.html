@@ -17,10 +17,12 @@
         const output = document.getElementById('output');
 
         function updateMathJax() {
-            output.innerHTML = input.value;
-            MathJax.typesetPromise();
+            let paragraphs = input.value.split('\n\n'); // Split the input by double newlines
+            let formattedText = paragraphs.map(para => `\\[\n${para}\n\\]`).join('\n\n'); // Wrap each paragraph and separate by double newlines
+            output.innerHTML = formattedText;
+            MathJax.typesetPromise();  // Re-render with MathJax
         }
-
+        
         input.addEventListener('input', updateMathJax);  // Update rendering on input change
         window.onload = updateMathJax;  // Initial rendering when the page loads
     </script>
