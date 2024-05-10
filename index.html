@@ -17,7 +17,8 @@
         const output = document.getElementById('output');
 
         function updateMathJax() {
-            output.innerHTML = input.value;
+            let paragraphs = input.value.split('\n\n');
+            output.innerHTML = paragraphs.map(paragraph => `\\[\n${paragraph}\n\\]`).join('\n\n');
             MathJax.typesetPromise();
         }
 
