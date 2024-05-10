@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Live LaTeX Rendering</title>
+    <title>LaTeX Live Renderer</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- Ensure MathJax 3 is used -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -17,12 +18,10 @@
         const output = document.getElementById('output');
 
         input.addEventListener('input', function() {
-            // Convert line breaks to LaTeX newlines \\
-            const formattedText = input.value.replace(/\n/g, '\\\\ ');
-            // Ensure it's treated as a block of math by surrounding with $$
+            // Use `\\` for new lines and wrap each line in \text{} if necessary
+            let formattedText = this.value.split('\n').map(line => `\\text{${line}}`).join(' \\\\ ');
             output.innerHTML = `$$${formattedText}$$`;
-            // Request MathJax to typeset the new math content
-            MathJax.typesetPromise();
+            MathJax.typesetPromise(); // Re-render with MathJax
         });
     </script>
 </body>
