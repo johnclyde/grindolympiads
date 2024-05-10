@@ -22,7 +22,7 @@
             output.innerHTML = formattedText;
             MathJax.typesetPromise();  // Re-render with MathJax
         }
-        
+
         input.addEventListener('input', updateMathJax);  // Update rendering on input change
         window.onload = updateMathJax;  // Initial rendering when the page loads
     </script>
