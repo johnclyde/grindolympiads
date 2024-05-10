@@ -17,9 +17,12 @@
         const output = document.getElementById('output');
 
         input.addEventListener('input', function() {
-            const text = input.value;
-            output.innerHTML = `$$${text}$$`;
-            MathJax.typesetPromise([output]);
+            // Convert line breaks to LaTeX newlines \\
+            const formattedText = input.value.replace(/\n/g, '\\\\ ');
+            // Ensure it's treated as a block of math by surrounding with $$
+            output.innerHTML = `$$${formattedText}$$`;
+            // Request MathJax to typeset the new math content
+            MathJax.typesetPromise();
         });
     </script>
 </body>
